@@ -12,3 +12,9 @@ logging_conf: {"files":{"rotateeverybytes":10485760}}
 output_conf: {"elasticsearch":{"hosts":["localhost:9200"]}}
 beats_pid_dir: "/var/run"
 beats_conf_dir: "/etc/{{beat}}"
+
+beat_pid_file: '{{ beats_pid_dir }}/{{ beat }}.pid'
+beat_instance_default_file: '{{ default_file }}/{{ beat }}'
+beat_conf_file: '{{ beats_conf_dir }}/{{ beat }}.yml'
+beat_output_conf:
+  output: '{{ output_conf }}'

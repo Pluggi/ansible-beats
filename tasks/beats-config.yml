@@ -1,14 +1,6 @@
 ---
 # Configure Beats Node
 
-- name: Set default facts
-  set_fact:
-    pid_file: '{{ beats_pid_dir }}/{{ beat }}.pid'
-    instance_default_file: '{{ default_file }}/{{ beat }}'
-    conf_file: '{{ beats_conf_dir }}/{{ beat }}.yml'
-    beat_output_conf:
-      output: '{{ output_conf }}'
-
 - name: Set beat_shipper_conf
   set_fact:
     beat_shipper_conf:
@@ -45,7 +37,7 @@
   become: yes
   template:
     src: beat.j2
-    dest: '{{ instance_default_file }}'
+    dest: '{{ beats_instance_default_file }}'
     mode: 0644
     force: true
     owner: root
@@ -57,7 +49,7 @@
   become: yes
   template:
     src: beat.yml.j2
-    dest: '{{ conf_file }}'
+    dest: '{{ beat_conf_file }}'
     mode: 0644
     force: true
     owner: root
